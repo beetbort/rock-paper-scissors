@@ -7,10 +7,18 @@
     <body>
         <script>
             function computerPlay() { 
-
+                
             }
 
-            
+            function playerPlay() { 
+                let pChoice = prompt(`Choose "Rock," "Paper," or "Scissors."`);
+
+                if (pChoice === null) { // Exit game if player hits cancel
+                    alert("Game ended."); // Could do a separate function here? 
+                } else { 
+                    return pChoice.trim().toLowerCase();
+                }
+            }
 
             function playRound(playerSelection, computerSelection) { 
 
@@ -19,7 +27,7 @@
             function game() { 
 
             }
-            console.log("hi"); 
+            console.log(playerPlay()); 
         </script>
     </body>
 </html>
