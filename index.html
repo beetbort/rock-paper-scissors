@@ -16,7 +16,13 @@
                 if (pChoice === null) { // Exit game if player hits cancel
                     alert("Game ended."); // Could do a separate function here? 
                 } else { 
-                    return pChoice.trim().toLowerCase();
+                    pChoice = pChoice.trim().toLowerCase();
+                    if (pChoice == "rock" || pChoice == "paper" || pChoice == "scissors") { 
+                        return pChoice;
+                    } else { 
+                        alert("That's not a valid move.")
+                        return playerPlay(); 
+                    }
                 }
             }
 
@@ -28,6 +34,7 @@
 
             }
             console.log(playerPlay()); 
+            console.log(computerPlay()); 
         </script>
     </body>
 </html>
