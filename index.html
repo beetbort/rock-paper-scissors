@@ -15,27 +15,57 @@
                 let pChoice = prompt(`Choose "Rock," "Paper," or "Scissors."`);
 
                 if (pChoice === null) { // Exit game if player hits cancel
-                    alert("Game ended."); // Could do a separate function here? 
+                    alert("Game ended."); 
                 } else { 
                     pChoice = pChoice.trim().toLowerCase();
                     if (pChoice == "rock" || pChoice == "paper" || pChoice == "scissors") { 
                         return pChoice;
                     } else { 
-                        alert("That's not a valid move.")
+                        alert("That's not a valid move."); 
                         return playerPlay(); 
                     }
                 }
             }
 
             function playRound(playerSelection, computerSelection) { 
-
+                console.log(playerSelection, computerSelection)
+                if (playerSelection == computerSelection) { 
+                    console.log("Tie!");
+                    return 0; 
+                } else if (playerSelection == "rock") { 
+                    if ( computerSelection == "scissors") { 
+                        console.log("You Win! Rock beats scissors");
+                        return 1;
+                    } else { 
+                        console.log("You Lose! Paper beats rock");
+                        return 0;
+                    }
+                } else if (playerSelection == "paper") { 
+                    if ( computerSelection == "rock") { 
+                        console.log("You Win! Paper beats rock");
+                        return 1;
+                    } else { 
+                        console.log("You Lose! Scissors beats paper");
+                        return 0;
+                    }
+                } else if (playerSelection == "scissors") { 
+                    if ( computerSelection == "paper") { 
+                        console.log("You Win! Scissors beats paper");
+                        return 1;
+                    } else { 
+                        console.log("You Lose! Rock beats scissors");
+                        return 0; 
+                    }
+                } else { 
+                    return("Something went wrong.");
+                }
             }
 
             function game() { 
 
             }
-            console.log(playerPlay()); 
-            console.log(computerPlay()); 
+
+            console.log(playRound(playerPlay(), computerPlay()));
         </script>
     </body>
 </html>
