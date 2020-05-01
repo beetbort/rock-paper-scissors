@@ -62,10 +62,24 @@
             }
 
             function game() { 
+                let score = 0; 
 
+                for (let i = 1; i <= 5; i++) { 
+                    score += playRound(playerPlay(), "rock");
+                }
+                
+                if (score >= 3) { 
+                    console.log(`You won with ${score} points!`);
+                } else { 
+                    if (score == 1) { 
+                        console.log(`You lost with 1 point!`);
+                    } else { 
+                        console.log(`You lost with ${score} points.`);
+                    }
+                }
             }
 
-            console.log(playRound(playerPlay(), computerPlay()));
+            game();
         </script>
     </body>
 </html>
