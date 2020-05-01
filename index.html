@@ -31,7 +31,7 @@
                 console.log(playerSelection, computerSelection)
                 if (playerSelection == computerSelection) { 
                     console.log("Tie!");
-                    return 0; 
+                    return playRound(playerPlay(), computerPlay()); 
                 } else if (playerSelection == "rock") { 
                     if ( computerSelection == "scissors") { 
                         console.log("You Win! Rock beats scissors");
