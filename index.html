@@ -12,14 +12,14 @@
             }
 
             function playerPlay() { 
-                let pChoice = prompt(`Choose "Rock," "Paper," or "Scissors."`);
+                let playerChoice = prompt(`Choose "rock," "paper," or "scissors."`);
 
-                if (pChoice === null) { // Exit game if player hits cancel
-                    alert("Game ended."); 
+                if (playerChoice === null) { // Exit game if player hits cancel
+                    return;
                 } else { 
-                    pChoice = pChoice.trim().toLowerCase();
-                    if (pChoice == "rock" || pChoice == "paper" || pChoice == "scissors") { 
-                        return pChoice;
+                    playerChoice = playerChoice.trim().toLowerCase();
+                    if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") { 
+                        return playerChoice;
                     } else { 
                         alert("That's not a valid move."); 
                         return playerPlay(); 
@@ -28,55 +28,66 @@
             }
 
             function playRound(playerSelection, computerSelection) { 
-                console.log(playerSelection, computerSelection)
                 if (playerSelection == computerSelection) { 
                     console.log("Tie!");
                     return playRound(playerPlay(), computerPlay()); 
                 } else if (playerSelection == "rock") { 
                     if ( computerSelection == "scissors") { 
-                        console.log("You Win! Rock beats scissors");
+                        console.log("You Win! Rock beats scissors.");
                         return 1;
                     } else { 
-                        console.log("You Lose! Paper beats rock");
+                        console.log("You Lose! Paper beats rock.");
                         return 0;
                     }
                 } else if (playerSelection == "paper") { 
                     if ( computerSelection == "rock") { 
-                        console.log("You Win! Paper beats rock");
+                        console.log("You Win! Paper beats rock.");
                         return 1;
                     } else { 
-                        console.log("You Lose! Scissors beats paper");
+                        console.log("You Lose! Scissors beats paper.");
                         return 0;
                     }
                 } else if (playerSelection == "scissors") { 
                     if ( computerSelection == "paper") { 
-                        console.log("You Win! Scissors beats paper");
+                        console.log("You Win! Scissors beats paper.");
                         return 1;
                     } else { 
-                        console.log("You Lose! Rock beats scissors");
+                        console.log("You Lose! Rock beats scissors.");
                         return 0; 
                     }
-                } else { 
-                    return("Something went wrong.");
+                } else if (playerSelection === undefined) { //From player hitting Cancel
+                    return -1; 
                 }
             }
 
             function game() { 
-                let score = 0; 
+                let totalScore = 0; 
+                let roundScore = 0;
+                let roundsPlayed = 0; 
 
-                for (let i = 1; i <= 5; i++) { 
-                    score += playRound(playerPlay(), "rock");
-                }
-                
-                if (score >= 3) { 
-                    console.log(`You won with ${score} points!`);
-                } else { 
-                    if (score == 1) { 
-                        console.log(`You lost with 1 point!`);
+                for (let i = 0; i < 5; i++) { 
+                    console.log(`Round ${i + 1}`);
+                    roundScore = playRound(playerPlay(), computerPlay());
+                    if (roundScore > -1) { 
+                        totalScore += roundScore;
+                        roundsPlayed += 1;
                     } else { 
-                        console.log(`You lost with ${score} points.`);
+                        console.log("Game ended.");
+                        break;
                     }
                 }
+                
+                if(roundsPlayed > 0) { 
+                    if (totalScore > roundsPlayed / 2 && roundsPlayed > 0) { 
+                        console.log(`You won the game with ${totalScore} out of ${roundsPlayed} points!`);
+                    } else if (totalScore < roundsPlayed / 2) { 
+                        console.log(`You lost the game with ${totalScore} out of ${roundsPlayed} points.`);
+                    } else if (totalScore == roundsPlayed) { 
+                        console.log(`You tied the game with ${totalScore} out of ${roundsPlayed} points.`);
+                    }
+                }
+                
+
             }
 
             game();
